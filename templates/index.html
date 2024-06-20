@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Generateur de Fake Faces</title>
+</head>
+<body>
+    <button style="color: red;" id="generateBtn">Générer Fake Face</button>
+    <img style="height: 200px; width: 200px;" id="fakeFace" src="" alt="Fake Face">
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            fetch('/generate')
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('fakeFace').src = url;
+                })
+                .catch(err => console.error('Erreur:', err));
+        });
+    </script>
+</body>
+</html>
